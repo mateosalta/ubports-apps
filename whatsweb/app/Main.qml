@@ -59,7 +59,6 @@ MainView {
 
         onFullScreenRequested: function(request) {
             request.accept();
-            nav.visible = !nav.visible
             if (request.toggleOn) {
                 window.showFullScreen();
             }
