@@ -15,8 +15,9 @@ MainView {
 
   ScreenSaver {
     id: screenSaver
-    screenSaverEnabled: !(Qt.application.active)
+        screenSaverEnabled: !Qt.application.active || !webview.recentlyAudible
   }
+
   objectName: "mainView"
   //theme.name: "Ubuntu.Components.Themes.SuruDark"
   applicationName: "alefnode.whatsweb"
@@ -54,6 +55,19 @@ MainView {
         focus: true
         property var currentWebview: webview
         settings.pluginsEnabled: true
+        settings.fullScreenSupportEnabled: true
+
+        onFullScreenRequested: function(request) {
+            request.accept();
+            nav.visible = !nav.visible
+            if (request.toggleOn) {
+                window.showFullScreen();
+            }
+            else {
+                window.showNormal();
+            }   
+         }
+
 
         profile:  WebEngineProfile {
           id: webContext
